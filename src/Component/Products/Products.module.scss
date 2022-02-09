@@ -1,0 +1,53 @@
+.products{
+    padding:  120px 40px 20px 40px;
+    .itemProduct{
+        border: 1px solid rgba(102, 102, 102 , 0.25);
+        .productImg{
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            padding: 40px 60px 0 60px;
+        }
+        .productTitle{
+            .phoneName{
+                font-size: 16px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .phoneDecription{
+                display: flex;
+                justify-content: space-around;
+                .productInfo{
+                    .phoneColor{
+                    font-size: 14px;
+                    }
+                    .phoneSoid{
+                        font-size: 14px;
+                    }
+                    .phonePrice{
+                        font-size: 16px;
+                    }
+                }
+                .productBtn {
+                    margin-top: 20px;
+                    .btnAddCard{
+                        border: none;
+                        outline: none;
+                        background-image: linear-gradient(#0F2027 , #2C5364);
+                        padding: 8px 40px;
+                        border-radius: 2px;
+                        cursor: pointer;
+                        &:hover{
+                            box-shadow: 0 0 10px rgba(0,0,0,0.7);
+                        }
+                        .btnIcon{
+                            font-size: 18px;
+                            color: #FFFFFF;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}

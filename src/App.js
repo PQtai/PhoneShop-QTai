@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {  } from 'react'
+import {Routes , Route , Link } from 'react-router-dom'
+import { useState } from 'react'
 
-function App() {
+// import Products from './Component/Products/Products'
+
+import HomePage from './pages/Home/HomePage'
+import SalePage from './pages/Sale/SalePage'
+import ShopAllPage from './pages/ShopAll/ShopAllPage'
+import Navbar from './Component/Navbar/Navbar'
+import Datas ,{PhonePopular} from './Datas'
+import SearchPage from './pages/Search/SearchPage'
+import CardPage from './pages/Card/CardPage'
+const App = () => {
+  const [productCards,setProductCards] = useState([]);
+  const [priceProduct , setPriceProduct] = useState(0);
+  // console.log(SearchPage);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar
+      Link={Link}
+      productCards={productCards}
+      Datas={Datas}
+      priceProduct = {priceProduct}
+      setPriceProduct= {setPriceProduct}
+      setProductCards={setProductCards}
+      ></Navbar>
+      <Routes>
+          <Route path='/' 
+          element={
+          <HomePage 
+            PhonePopular={PhonePopular}  
+            productCards={productCards}
+            priceProduct= {priceProduct}
+            setPriceProduct= {setPriceProduct}
+            setProductCards={setProductCards}
+            Link= {Link}
+          />}/>
+          <Route path='/salePage' element={<SalePage/>}/>
+          <Route path='/shopAllPage' 
+          element={
+          <ShopAllPage
+            productCards={productCards}
+            setProductCards={setProductCards}
+            priceProduct= {priceProduct}
+            setPriceProduct= {setPriceProduct}
+            Link= {Link}
+          />}/>
+          <Route path='/searchPage' 
+          element={<SearchPage
+            PhonePopular={PhonePopular}  
+            productCards={productCards}
+            priceProduct= {priceProduct}
+            setPriceProduct= {setPriceProduct}
+            setProductCards={setProductCards}
+          />}/>
+          <Route path='/cardPage'
+          element={<CardPage/>}
+          ></Route>
+      </Routes>
     </div>
-  );
+  )
 }
-
-export default App;
+export default App

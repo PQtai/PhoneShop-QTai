@@ -1,0 +1,7 @@
+export {default as CameraImg} from './camera.jpg'
+export {default as ChipImg} from './chip.jpg'
+export {default as WaterproofImg} from './Waterproof.jpg'
+export {default as CursorImg} from './cursor-close.png'
+export {default as CursorX2Img} from './cursor-close@2x.png'
+export {default as Store1} from './store1.jpg'
+export {default as Store2} from './store2.jpg'
