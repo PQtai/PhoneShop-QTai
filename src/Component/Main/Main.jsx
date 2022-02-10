@@ -53,7 +53,7 @@ const functionHandlePopular = () => {
           <Grid container justify="center" spacing={2}>
               <Grid item md={4} >
                 <div className={clsx(style.itemTechnology)} >
-                    <img src={ChipImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
+                    <img src={process.env.PUBLIC_URL + ChipImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
                     <ul className={clsx(style.techList)} >
                         <li>Công nghệ Chipset hàng đầu</li>
                         <li>Tiến trình 5nm+(N5P)</li>
@@ -63,7 +63,7 @@ const functionHandlePopular = () => {
               </Grid>
               <Grid item md={4} >
                 <div className={clsx(style.itemTechnology)} >
-                    <img src={WaterproofImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
+                    <img src={process.env.PUBLIC_URL + WaterproofImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
                     <ul className={clsx(style.techList)} >
                         <li>Đạt chuẩn kháng nước IP 68</li>
                         <span className={clsx(style.itemLink)} >Tìm hiểu ngay</span>
@@ -72,7 +72,7 @@ const functionHandlePopular = () => {
               </Grid>
               <Grid item md={4} >
                 <div className={clsx(style.itemTechnology)} >
-                    <img src={CameraImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
+                    <img src={process.env.PUBLIC_URL + CameraImg} className={clsx(style.img)} alt={"Ảnh chip set"} ></img>
                     <ul className={clsx(style.techList)} >
                         <li>Công nghệ AI với chip Tensor, giữ vững ngôi vương về camera!</li>
                         <span className={clsx(style.itemLink)} >Tìm hiểu ngay</span>
@@ -146,14 +146,14 @@ const functionHandlePopular = () => {
       <div className={clsx(style.store)}>
           <Grid container justify="center" spacing={5}>
               <Grid item md={6} sm={12} xs={12}>
-                    <div alt={"ảnh img"} className={clsx(style.imgStore)} style={{backgroundImage : `url(${Store1})`}} ></div>
+                    <div alt={"ảnh img"} className={clsx(style.imgStore)} style={{backgroundImage : `url(${process.env.PUBLIC_URL + Store1})`}} ></div>
                     <div className={clsx(style.storeTitle)}>
                         <h5>Cửa hàng Q T S</h5>
                         <span className={clsx(style.goStore)} >Tham quan</span>
                     </div>
               </Grid>
               <Grid item md={6} sm={12} xs={12} >
-                    <div alt={"ảnh img"} className={clsx(style.imgStore)} style={{backgroundImage : `url(${Store2})`}} ></div>
+                    <div alt={"ảnh img"} className={clsx(style.imgStore)} style={{backgroundImage : `url(${process.env.PUBLIC_URL + Store2})`}} ></div>
                     <div className={clsx(style.storeTitle)}>
                         <h5>Trung tâm bảo hành tại Q T S</h5>
                         <span className={clsx(style.goStore)} >Tham quan</span>
