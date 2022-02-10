@@ -1,9 +1,9 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 
 import Header from '../../Component/Header/Header'
 import Main from '../../Component/Main/Main'
-import Footer from '../../Component/Footer/Footer'
 const HomePage = ({PhonePopular , quantity ,setQuantity , productCards,setProductCards , setPriceProduct , priceProduct , Link}) => {
   return (
     <>
@@ -19,7 +19,7 @@ const HomePage = ({PhonePopular , quantity ,setQuantity , productCards,setProduc
       setProductCards={setProductCards}
       setPriceProduct={setPriceProduct}
       ></Main>
-      <Footer></Footer>
+      <Outlet></Outlet>
     </>
   )
 }

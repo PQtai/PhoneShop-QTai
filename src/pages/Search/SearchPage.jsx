@@ -4,7 +4,6 @@ import clsx from 'clsx'
 
 
 import Products from '../../Component/Products/Products'
-import Footer from '../../Component/Footer/Footer'
 import ButtonFind from '../../Component/ButtonFind/ButtonFind'
 import style from './SearchPage.module.scss'
 import Datas from '../../Datas'
@@ -14,7 +13,6 @@ const SearchPage = ({PhonePopular , productCards , priceProduct , setPriceProduc
         sm : 12,
         xs : 12
     }
-    // const elementInput = useRef();
     const [arrProductsFilter , setArrProductsFilter ] = useState();
     const [nameFilter , setNameFilter] = useState("iphone");
     useEffect(() => {
@@ -22,7 +20,6 @@ const SearchPage = ({PhonePopular , productCards , priceProduct , setPriceProduc
         return Data.theloai === nameFilter;
       })) 
     },[nameFilter])
-    // console.log(arrProductsFilter);
     return (
     <>
       <div className={clsx(style.searchPage)} >
@@ -36,7 +33,6 @@ const SearchPage = ({PhonePopular , productCards , priceProduct , setPriceProduc
                 grid = {grid}
                 arrProductsFilter={arrProductsFilter}
                 />
-                <Footer></Footer>
           </div>
           <div className={clsx(style.itemSearch)} >
             <div className={clsx(style.trademark)} >

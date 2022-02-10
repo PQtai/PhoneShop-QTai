@@ -11,6 +11,7 @@ import Navbar from './Component/Navbar/Navbar'
 import Datas ,{PhonePopular} from './Datas'
 import SearchPage from './pages/Search/SearchPage'
 import CardPage from './pages/Card/CardPage'
+import Footer from './Component/Footer/Footer'
 const App = () => {
   const [productCards,setProductCards] = useState([]);
   const [priceProduct , setPriceProduct] = useState(0);
@@ -58,6 +59,7 @@ const App = () => {
           element={<CardPage/>}
           ></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   )
 }

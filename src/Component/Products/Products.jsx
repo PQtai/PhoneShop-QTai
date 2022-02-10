@@ -9,7 +9,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 const Products = ( {productCards , setProductCards , priceProduct , setPriceProduct, arrProductsFilter , grid} ) => {
-    console.log(arrProductsFilter);
   return (
     <main className={clsx(style.products)} >
         <div>

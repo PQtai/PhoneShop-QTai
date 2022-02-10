@@ -1,6 +1,5 @@
 import style from './ShopAllPage.module.scss'
 import Products from '../../Component/Products/Products'
-import Footer from '../../Component/Footer/Footer'
 import ButtonFind from '../../Component/ButtonFind/ButtonFind'
 
 
@@ -16,7 +15,6 @@ const shopAll = ( {productCards , setProductCards , priceProduct , setPriceProdu
         setPriceProduct={setPriceProduct}
       ></Products>
       <ButtonFind/>
-      <Footer></Footer>
     </div>
   )
 }

@@ -9,7 +9,7 @@ const Header = ({Link}) => {
             <Grid item md={8.5} sm={12} xs={12}>
                 <div className={clsx(style.headerBox)}>
                     <div className={clsx(style.headerBoxImg)}
-                    style={{backgroundImage : "url('https://cdn.pocket-lint.com/r/s/1200x630/assets/images/157948-phones-news-samsung-galaxy-z-fold-3-renders-and-full-specs-leak-image1-vtkgup9vo2.jpg')"}}
+                    style={{backgroundImage : "url('https://images.samsung.com/vn/smartphones/galaxy-z-fold3-5g/images/galaxy-z-fold3-5g_highlights_kv_img.jpg')"}}
                     ></div>
                 </div>
             </Grid>
