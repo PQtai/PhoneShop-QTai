@@ -7,10 +7,10 @@ const ButtonFind = () => {
   return (
     <div className={clsx(style.Find)}>
         <div className={style.FindProduct} >
-          <Link to="/shopAllPage" >
+          <Link to="/PhoneShop-QTai/shopAllPage" >
               <button className={clsx(style.btnGrid)}>Lưới</button>
           </Link>
-          <Link to="/searchPage" >
+          <Link to="/PhoneShop-QTai/searchPage" >
               <button className={clsx(style.btnSearch)}>Lọc</button>
           </Link>
         </div>

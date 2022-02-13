@@ -14,6 +14,9 @@ const Navbar = ({
   priceProduct,
   setPriceProduct,
   setProductCards,
+  arrayProductCollapse,
+  setArrayProductCollapse,
+  countsProduct
 }) => {
   const elementSearch = useRef();
   const elementOverlay = useRef();
@@ -22,8 +25,8 @@ const Navbar = ({
   const elementAccount = useRef();
   const elementCard = useRef();
   const [overlay , setOverlay] = useState(false);
-  const [arrayProductCollapse , setArrayProductCollapse] = useState([]);
-  const countsProduct = useRef({})
+  // const [arrayProductCollapse , setArrayProductCollapse] = useState([]);
+  // const countsProduct = useRef({})
   useEffect(() => {
     if(overlay){
       elementOverlay.current.style.display = 'block';
@@ -64,7 +67,7 @@ const Navbar = ({
   }
   return (
     <nav className={clsx(style.navbar)} ref={elementNavbar} >
-        <Link to='/' style={{textDecoration: 'none'}}>
+        <Link to='/PhoneShop-QTai' style={{textDecoration: 'none'}}>
           <div className={clsx(style.logo)} >
               <PhoneIphoneTwoToneIcon className={clsx(style.logoIcon)} />
               <h2 className={clsx(style.logoTitle)}>Q T S</h2>
@@ -72,8 +75,8 @@ const Navbar = ({
         </Link>
         <div className={clsx(style.category)}>
           <ul className={clsx(style.categoryList)}>
-            <Link style={{textDecoration: 'none'}} to='/shopAllPage' ><li className={clsx(style.categoryItem)}>Trong Shop</li></Link>
-            <Link style={{textDecoration: 'none'}} to='/salePage'><li className={clsx(style.categoryItem)}>Giảm Giá</li></Link>
+            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/shopAllPage' ><li className={clsx(style.categoryItem)}>Trong Shop</li></Link>
+            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/salePage'><li className={clsx(style.categoryItem)}>Giảm Giá</li></Link>
           </ul>
           <ul className={clsx(style.categoryList,style.categoryCustomer)}>
               <li 
@@ -230,7 +233,7 @@ const Navbar = ({
                           >
                             <DeleteIcon/>
                           </button>
-                          <Link style={{textDecoration: 'none' , display: 'block'}} to='/cardPage' >
+                          <Link style={{textDecoration: 'none' , display: 'block'}} to='/PhoneShop-QTai/cardPage' >
                               <button className={clsx(style.optionRepair)}>Sửa</button>
                           </Link>
                         </div>
@@ -244,7 +247,7 @@ const Navbar = ({
             <span>{priceProduct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</span>
           </div>
           <div className={clsx(style.cardCheckout)}>
-          <Link style={{textDecoration: 'none' , display: 'block'}} to='/cardPage' >
+          <Link style={{textDecoration: 'none' , display: 'block'}} to='/PhoneShop-QTai/cardPage' >
               <button className={clsx(style.btnCheckout)}>Checkout</button>
           </Link>
           </div>

@@ -1,6 +1,5 @@
-import React, {  } from 'react'
+import React, { useState, useRef } from 'react'
 import {Routes , Route , Link } from 'react-router-dom'
-import { useState } from 'react'
 
 // import Products from './Component/Products/Products'
 
@@ -15,7 +14,8 @@ import Footer from './Component/Footer/Footer'
 const App = () => {
   const [productCards,setProductCards] = useState([]);
   const [priceProduct , setPriceProduct] = useState(0);
-  // console.log(SearchPage);
+  const [arrayProductCollapse , setArrayProductCollapse] = useState([]);
+  const countsProduct = useRef({})
   return (
     <div>
       <Navbar
@@ -25,9 +25,12 @@ const App = () => {
       priceProduct = {priceProduct}
       setPriceProduct= {setPriceProduct}
       setProductCards={setProductCards}
+      arrayProductCollapse= {arrayProductCollapse}
+      setArrayProductCollapse= {setArrayProductCollapse}
+      countsProduct= {countsProduct}
       ></Navbar>
       <Routes>
-          <Route path='/' 
+          <Route path='/PhoneShop-QTai' 
           element={
           <HomePage 
             PhonePopular={PhonePopular}  
@@ -37,8 +40,8 @@ const App = () => {
             setProductCards={setProductCards}
             Link= {Link}
           />}/>
-          <Route path='/salePage' element={<SalePage/>}/>
-          <Route path='/shopAllPage' 
+          <Route path='/PhoneShop-QTai/salePage' element={<SalePage/>}/>
+          <Route path='/PhoneShop-QTai/shopAllPage' 
           element={
           <ShopAllPage
             productCards={productCards}
@@ -47,7 +50,7 @@ const App = () => {
             setPriceProduct= {setPriceProduct}
             Link= {Link}
           />}/>
-          <Route path='/searchPage' 
+          <Route path='/PhoneShop-QTai/searchPage' 
           element={<SearchPage
             PhonePopular={PhonePopular}  
             productCards={productCards}
@@ -55,8 +58,12 @@ const App = () => {
             setPriceProduct= {setPriceProduct}
             setProductCards={setProductCards}
           />}/>
-          <Route path='/cardPage'
-          element={<CardPage/>}
+          <Route path='/PhoneShop-QTai/cardPage'
+          element={<CardPage
+            arrayProductCollapse= {arrayProductCollapse}
+            setArrayProductCollapse= {setArrayProductCollapse}
+            countsProduct= {countsProduct}
+          />}
           ></Route>
       </Routes>
       <Footer></Footer>
