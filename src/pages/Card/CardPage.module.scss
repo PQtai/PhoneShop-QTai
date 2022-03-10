@@ -1,6 +1,111 @@
 .cardBody {
     display: flex;
-    .listCard {
-        margin: 50vh auto;
+    flex-direction: column;
+    margin: 100px auto 0 auto;
+    padding: 0 40px 10px 40px;
+    .card {
+        // margin: auto;
+        list-style: none;
+        .title {
+            display: flex;
+            .linkReturn{
+                width: 260px;
+            }
+            .listProducts{
+                list-style: none;
+                margin: 0;
+                flex: 1;
+                .itemTitle ,
+                .itemProduct{
+                    display: flex;
+                    border-bottom: 1px solid #333;
+                    padding-bottom: 10px ;
+                    .nameTitle ,
+                    .productInfo{
+                        width: 20%;
+                        display: flex;
+                        align-items: center;
+                        margin: auto;
+                        // justify-content: space-between;
+                        .handleQuantity {
+                            display: flex;
+                            flex-direction: column;
+                            .btn {
+                                outline: none;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: none;
+                                width: 20px;
+                                height: 20px;
+                                margin: 4px 0 4px 20px;
+                                cursor: pointer;
+                            }
+                        }
+                        .btnDelete {
+                            margin-left: 20px;
+                            border: none;
+                            outline: none;
+                            padding: 0 2px;
+                            border-radius: 50%;
+                            background-color: #FFFFFF;
+                            &:hover {
+                                background-color: rgba(204, 204, 204 , 0.35);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    .nameProduct{
+                        width: 30%;
+                        display: flex;
+                        align-items: center;
+                        .namePhone{
+                            margin-left: 30px;
+                        }
+                        .imgProduct{
+                            width: 80px;
+                            height: 100px;
+                        }
+                    }
+                    .priceProduct,
+                    .priceProduct{
+                        width: 10%;
+                    }
+                }
+                .itemProduct{
+                    border-bottom: 1px solid #ccc;
+                    padding-bottom: 0;
+                    padding: 5px 0;
+                }
+            }
+            
+        }
+        .checkout{
+            display: inline-flex;
+            float: right;
+            flex-direction: column;
+            align-items: right;
+            margin-top: 20px;
+            padding: 0 10px;
+            .price{
+                display: flex;
+                justify-content: space-between;
+            }
+            .btnCheckout{
+                width: 400px;
+                height: 50px;
+                margin-top: 20px;
+                background-color: #111;
+                color: #FFFFFF;
+                outline: none;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 4px;
+                &:hover {
+                    box-shadow: 1px 1px 10px rgba(0 , 0, 0, 0.5);
+                }
+            }
+        }
     }
 }

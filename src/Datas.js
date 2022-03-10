@@ -10,7 +10,7 @@ const Data = [
         chip: "Apple A15 Bionic",
         ram : "6GB",
         memory: "128gb",
-        image : 'https://images.fpt.shop/unsafe/fit-in/800x800/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2021/9/15/637673217820889289_iphone-13-pro-max-vang-1.jpg',
+        image : 'https://anhducdigital.vn/media/product/13268_iphone_13_pro_max_128gb_gold_chinh_hang_3.webp',
         price : 33990000
     },
     {
@@ -62,7 +62,7 @@ const Data = [
         chip: "Apple A14 Bionic",
         ram : "6GB",
         memory: "128gb",
-        image : 'https://thongsokythuat.vn/wp-content/uploads/iphone-12-pro-max-family-hero-all.jpg',
+        image : 'https://thuanphatmobile.vn/images/iphone-12-pro-max-bi-loi-camera-1.jpg',
         price : 29190000
     },
     {
@@ -83,7 +83,7 @@ const Data = [
         soid: 210,
         color: "Trắng",
         rating: 4,
-        theloai: "Xanh",
+        theloai: "iphone",
         name: "iphone 12 mini",
         chip: "Apple A14 Bionic",
         ram : "4GB",
@@ -114,7 +114,7 @@ const Data = [
         chip: "Apple A13 Bionic",
         ram : "4GB",
         memory: "256gb",
-        image : 'https://cdn.hoanghamobile.com/i/preview/Uploads/2020/10/10/iPhone%2011%20Pro%20(5).png',
+        image : 'https://dienmaygiagoc.com.vn/uploads/product/2020/28/dien-thoai-iphone-11-pro-max-64gb-mwhg2vn-a-gold-3.jpg',
         price : 15400000
     },
     {
@@ -530,10 +530,9 @@ const Data = [
         chip: "MediaTek Helio P35",
         ram : "3GB",
         memory: "32gb",
-        image : 'https://hc.com.vn/i/ecommerce/media/GS.007157_FEATURE_74907.jpg',
+        image : 'https://cdn.tgdd.vn/Products/Images/42/229885/oppo-a15-white-200x200.jpg',
         price : 3690000
     }
-    
 ]
 const PhonePopular = Data.filter((phone , index) => {
     return phone.soid >= 400; 

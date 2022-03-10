@@ -1,0 +1,24 @@
+.formConfirm {
+    position: relative;
+    background-color: #FFFFFFFF;
+    width: 400px;
+    height:300px;
+    z-index: 10;
+    margin: auto;
+    display: none;
+    transform-origin: center;
+    animation: pouring-effect ease-in-out .2s;
+}
+.active {
+    display: flex;
+}
+@keyframes pouring-effect {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

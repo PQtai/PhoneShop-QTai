@@ -1,13 +1,16 @@
 import React, { useEffect, useRef , useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
-
-import cursor from '../../assets/img/cursor-close.png'
 import style from './Navbar.module.scss'
 import PhoneIphoneTwoToneIcon from '@mui/icons-material/PhoneIphoneTwoTone';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Grid } from '@mui/material';
+
+
+
+
 const Navbar = ({
   Link , 
   productCards ,
@@ -16,31 +19,39 @@ const Navbar = ({
   setProductCards,
   arrayProductCollapse,
   setArrayProductCollapse,
-  countsProduct
+  countsProduct,
+  handleDeleteProduct,
+  scrollToTop,
+  overlay,
+  setOverlay,
+  elementOverlay,
+  displayFormConfirm
 }) => {
   const elementSearch = useRef();
-  const elementOverlay = useRef();
   const elementNavbar = useRef();
   const elementSupport = useRef();
   const elementAccount = useRef();
   const elementCard = useRef();
-  const [overlay , setOverlay] = useState(false);
-  // const [arrayProductCollapse , setArrayProductCollapse] = useState([]);
-  // const countsProduct = useRef({})
+  const [zIndexNav , setZIndexNav] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     if(overlay){
-      elementOverlay.current.style.display = 'block';
+      elementOverlay.current.style.display = 'flex';
     }else{
       elementOverlay.current.style.display = 'none';
       elementSearch.current.classList.remove(clsx(style.displaySearch));
       elementSupport.current.classList.remove(clsx(style.displaySup));
       elementAccount.current.classList.remove(clsx(style.displayAccount));
       elementCard.current.classList.remove(clsx(style.displayCardInf))
-      if (document.documentElement.scrollTop > 60) {
+      if (document.documentElement.scrollTop > 60 ) {
         elementNavbar.current.classList.add(clsx(style.navbarScroll));
+        setZIndexNav(false);
       }
     }
-  },[overlay])
+    if(displayFormConfirm === true) {
+      setZIndexNav(true);
+    }
+  },[overlay , displayFormConfirm])
   useEffect(() => {
      window.onscroll = () => {
       if (document.documentElement.scrollTop > 60) {
@@ -59,24 +70,20 @@ const Navbar = ({
       return productCards.indexOf(card) === index;
     }))
   },[productCards])
-  const handleDeleteProduct = (currentIndex) => {
-      var arr = productCards.filter((productCard, index) => {
-        return productCard.id !== currentIndex;
-      })
-      setProductCards(arr);
-  }
   return (
-    <nav className={clsx(style.navbar)} ref={elementNavbar} >
+    <nav className={clsx(style.navbar , {
+      [style.zIndexNav] : zIndexNav
+    })} ref={elementNavbar} >
         <Link to='/PhoneShop-QTai' style={{textDecoration: 'none'}}>
-          <div className={clsx(style.logo)} >
+          <div onClick={scrollToTop}  className={clsx(style.logo)} >
               <PhoneIphoneTwoToneIcon className={clsx(style.logoIcon)} />
               <h2 className={clsx(style.logoTitle)}>Q T S</h2>
           </div>
         </Link>
         <div className={clsx(style.category)}>
           <ul className={clsx(style.categoryList)}>
-            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/shopAllPage' ><li className={clsx(style.categoryItem)}>Trong Shop</li></Link>
-            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/salePage'><li className={clsx(style.categoryItem)}>Giảm Giá</li></Link>
+            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/ShopAllPage' ><li className={clsx(style.categoryItem)}>Trong Shop</li></Link>
+            <Link style={{textDecoration: 'none'}} to='/PhoneShop-QTai/SalePage'><li className={clsx(style.categoryItem)}>Giảm Giá</li></Link>
           </ul>
           <ul className={clsx(style.categoryList,style.categoryCustomer)}>
               <li 
@@ -138,7 +145,7 @@ const Navbar = ({
         </div>
         <div ref={elementSearch} className={clsx(style.itemSearch)}>
             <div className={clsx(style.inputSearch)}>
-              <input type="text" className={clsx(style.inputType)} placeholder="Tìm kiếm bất mẫu điện thoại mà bạn muốn"></input>
+              <input type="text" className={clsx(style.inputType)} placeholder="Tìm kiếm bất kỳ mẫu điện thoại mà bạn muốn"></input>
             </div>
         </div>
         <div ref={elementSupport} className={clsx(style.itemSup)} >
@@ -233,9 +240,13 @@ const Navbar = ({
                           >
                             <DeleteIcon/>
                           </button>
-                          <Link style={{textDecoration: 'none' , display: 'block'}} to='/PhoneShop-QTai/cardPage' >
-                              <button className={clsx(style.optionRepair)}>Sửa</button>
-                          </Link>
+                          <button 
+                          onClick={() => {
+                            navigate('/PhoneShop-QTai/CardPage')
+                            setOverlay(false);
+                          }} 
+                          className={clsx(style.optionRepair)}
+                          >Sửa</button>
                         </div>
                     </div>
                   )
@@ -247,19 +258,13 @@ const Navbar = ({
             <span>{priceProduct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</span>
           </div>
           <div className={clsx(style.cardCheckout)}>
-          <Link style={{textDecoration: 'none' , display: 'block'}} to='/PhoneShop-QTai/cardPage' >
-              <button className={clsx(style.btnCheckout)}>Checkout</button>
-          </Link>
+              <button onClick={() => {
+                navigate('/PhoneShop-QTai/CardPage')
+                setOverlay(false);
+              }} 
+              className={clsx(style.btnCheckout)}>Checkout</button>
           </div>
         </div>
-      <div 
-        ref={elementOverlay} 
-        className={clsx(style.categoryOverlay)}
-        onClick={() => {
-          setOverlay(false);
-        }}
-        style={{cursor : `url(${cursor}) 20 20,default`}}
-      ></div>
     </nav>        
   )
 }

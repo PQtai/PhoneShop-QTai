@@ -9,6 +9,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 import style from './Main.module.scss'
+import Notification from '../Notification/Notification'
 import {
     ChipImg ,
     WaterproofImg , 
@@ -31,6 +32,8 @@ const position = useRef(0);
 const paretPopular = useRef();
 const childPopular = useRef();
 const widthItemPopular = useRef();
+const elementNotification = useRef();
+const isSuccess = useRef(false);
 const po = useRef();
 const co = useRef();
 const cw = useRef();
@@ -40,6 +43,18 @@ useEffect(() => {
     elementPopular.current[0].current.focus();
     widthItemPopular.current = elementPopular.current[0].current.offsetWidth;
 },[PhonePopular]);
+useEffect(() => {
+    let timerId;
+    if(isSuccess.current){
+        elementNotification.current.style.transform = 'translateX(40px)';
+        timerId = setTimeout(() => {
+            elementNotification.current.style.transform = 'translateX(-100%)';
+        },[2000]);
+    }
+    return () => {
+        clearTimeout(timerId);
+    }
+},[productCards]);
 const functionHandlePopular = () => {
     po.current = paretPopular.current.getBoundingClientRect();
     co.current = childPopular.current.getBoundingClientRect();
@@ -131,9 +146,16 @@ const functionHandlePopular = () => {
                                 <span className={clsx(style.price)} >Giá: {phone.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</span>
                                 <button 
                                 className={clsx(style.btnAddCard)} 
-                                onClick={() => {
-                                    setProductCards(productCards.concat([phone]));
-                                    setPriceProduct( priceProduct + phone.price)
+                                onClick={(e) => {
+                                    isSuccess.current = true;
+                                    if(isSuccess.current){
+                                        e.target.style.cursor = 'not-allowed';
+                                        setTimeout(() => {
+                                            setProductCards(productCards.concat([phone]));
+                                            setPriceProduct( priceProduct + phone.price);
+                                            e.target.style.cursor = 'pointer';
+                                        },[1000])
+                                    }
                                 }}
                                 >Thêm vào giỏ hàng</button>
                             </div>
@@ -161,6 +183,7 @@ const functionHandlePopular = () => {
               </Grid>
           </Grid>
       </div>
+      <Notification elementNotification={elementNotification} ></Notification>  
     </div>
   )
 }
