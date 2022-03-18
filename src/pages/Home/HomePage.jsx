@@ -7,12 +7,16 @@ import Main from '../../Component/Main/Main'
 const HomePage = ({PhonePopular ,
   quantity ,
   setQuantity ,
-  productCards,
-  setProductCards , 
+  productCarts,
+  setProductCarts , 
   setPriceProduct , 
   priceProduct , 
   Link,
-  isSuccess
+  isSuccess,
+  notificationMessage,
+  setNotificationMessage,
+  openNotification,
+  setOpenNotification
   }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,11 +31,15 @@ const HomePage = ({PhonePopular ,
       quantity={quantity}
       PhonePopular={PhonePopular} 
       setQuantity={setQuantity}
-      productCards={productCards}
+      productCarts={productCarts}
       priceProduct={priceProduct}
-      setProductCards={setProductCards}
+      setProductCarts={setProductCarts}
       setPriceProduct={setPriceProduct}
       isSuccess = {isSuccess}
+      notificationMessage = {notificationMessage}
+      setNotificationMessage= {setNotificationMessage}
+      openNotification={openNotification}
+      setOpenNotification={setOpenNotification}
       ></Main>
       <Outlet></Outlet>
     </>

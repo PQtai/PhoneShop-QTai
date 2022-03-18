@@ -7,22 +7,25 @@ import Notification from '../../Component/Notification/Notification'
 import clsx from 'clsx'
 import React , {useEffect , useState , useRef} from 'react'
 const ShopAllPage = ( {
-  productCards , 
-  setProductCards , 
+  productCarts , 
+  setProductCarts , 
   priceProduct , 
   setPriceProduct,
   scrollToTop,
   Link,
-  setIdInfoProduct
+  idInfoProduct,
+  setIdInfoProduct,
+  openNotification,
+  notificationMessage,
+  setNotificationMessage,
+  setOpenNotification,
   } ) => {
     
     const elementnavigateSearch = useRef();
     const elementFindBtn = useRef();
     const elementGridBtn = useRef();
     const elementSearch = useRef();
-    const elementNotification = useRef();
     const [arrPhoneCompany,setArrPhoneCompany] = useState([]);
-    const isSuccess = useRef(false);
     const [arrProductsFilter , setArrProductsFilter] = useState();
     const [nameFilter , setNameFilter] = useState();
 
@@ -37,18 +40,6 @@ const ShopAllPage = ( {
     setArrPhoneCompany(arr);
   }
 useEffect(() => {
-  let timerId;
-  if(isSuccess.current){
-    elementNotification.current.style.transform = 'translateX(40px)';
-    timerId = setTimeout(() => {
-        elementNotification.current.style.transform = 'translateX(-100%)';
-    },[1000]);
-  }
-return () => {
-    clearTimeout(timerId);
-}
-},[productCards]);
-useEffect(() => {
     if(nameFilter){
       setArrProductsFilter(
         Datas.filter((data , index)=> {
@@ -61,14 +52,18 @@ useEffect(() => {
     <div className={clsx(style.shopAll)} >
      <div className={clsx(style.products)} >
       <Products
-          productCards={productCards}
-          setProductCards={setProductCards}
+          productCarts={productCarts}
+          setProductCarts={setProductCarts}
           priceProduct={priceProduct}
           setPriceProduct={setPriceProduct}
-          isSuccess = {isSuccess}
           arrProductsFilter ={arrProductsFilter}
           Link ={Link}
+          idInfoProduct= {idInfoProduct}
           setIdInfoProduct={setIdInfoProduct}
+          openNotification={openNotification}
+          notificationMessage={notificationMessage}
+          setOpenNotification={setOpenNotification}
+          setNotificationMessage={setNotificationMessage}
         ></Products>
      </div>
       <div ref={elementnavigateSearch} className={clsx(style.navigateSearch)}>
@@ -116,7 +111,11 @@ useEffect(() => {
         }}
         >Lọc</button>
       </div>
-      <Notification elementNotification={elementNotification} ></Notification>  
+      <Notification 
+      openNotification={openNotification}
+      notificationMessage={notificationMessage}
+      setOpenNotification={setOpenNotification}
+      ></Notification>  
     </div>
   )
 }

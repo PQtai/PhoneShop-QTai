@@ -1,23 +1,24 @@
 import style from './InfoProductPage.module.scss'
 import Datas from '../../Datas'
-
+import FormConfirm from '../../Component/FormConfirm/FormConfirm'
 
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import { Grid, Container } from '@mui/material'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-
+import {useNavigate} from 'react-router-dom';
 
 const InfoProductPage = ({
   idInfoProduct,
   setIdInfoProduct,
   scrollToTop,
   setOverlay,
-  setDisplayFormConfirm
+  setDisplayFormConfirm,
+  elementFormConfirm,
+  displayFormConfirm
 }) => {
-
-
+  const navigate = useNavigate();
   const position = useRef(0)
   const [infoProduct, setInfoProduct] = useState(Datas.find((data, index) => {
     return data.id === idInfoProduct;
@@ -161,7 +162,8 @@ const InfoProductPage = ({
                 key={index}
                 className={style.itemSimilarProduct}
                 onClick={() => {
-                  setIdInfoProduct(product.id);
+                  setIdInfoProduct(product.id)
+                  navigate('/PhoneShop-QTai/InfoProduct/' + product.id)
                   scrollToTop();
                 }}>
                 <div
@@ -186,6 +188,13 @@ const InfoProductPage = ({
           />
         </div>
       </Container>
+      <FormConfirm
+            elementFormConfirm={elementFormConfirm}
+            displayFormConfirm={displayFormConfirm}
+            infoProduct= {infoProduct}
+            setOverlay= {setOverlay}
+            setDisplayFormConfirm= {setDisplayFormConfirm}
+      />
     </div>
   )
 }

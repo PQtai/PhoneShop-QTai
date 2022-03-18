@@ -1,25 +1,31 @@
 import React, { useState, useRef } from 'react'
 import {Routes , Route , Link } from 'react-router-dom'
 
-// import Products from './Component/Products/Products'
-
 import HomePage from './pages/Home/HomePage'
 import SalePage from './pages/Sale/SalePage'
 import ShopAllPage from './pages/ShopAll/ShopAllPage'
 import Navbar from './Component/Navbar/Navbar'
 import Datas ,{PhonePopular} from './Datas'
-import CardPage from './pages/Card/CardPage'
+import CartPage from './pages/Cart/CartPage'
 import InfoProductPage from './pages/InfoProduct/InfoProductPage'
 import Footer from './Component/Footer/Footer'
 import cursor from './assets/img/cursor-close.png'
 import Overlay from './Component/Overlay/Overlay'
+import Login from './Component/Login/Login'
+import Register from './Component/Register/Register'
+import Loading from './Component/Loading/Loading'
 const App = () => {
-  const [productCards,setProductCards] = useState([]);
+  const [productCarts,setProductCarts] = useState([]);
   const [priceProduct , setPriceProduct] = useState(0);
   const [arrayProductCollapse , setArrayProductCollapse] = useState([]);
   const [idInfoProduct , setIdInfoProduct] = useState();
   const [overlay , setOverlay] = useState(false);
   const [displayFormConfirm,setDisplayFormConfirm] = useState(false);
+  const [displayFormRegister,setDisplayFormRegister] = useState(false);
+  const [displayFormLogin,setDisplayFormLogin] = useState(false);
+  const [isLoading , setIsLoading] = useState(false);
+  const [openNotification, setOpenNotification] = useState(false);
+  const [notificationMessage , setNotificationMessage] = useState("");
   const countsProduct = useRef({})
   const elementOverlay = useRef();
   const elementFormConfirm = useRef();
@@ -31,20 +37,20 @@ const App = () => {
     }
   };
   const handleDeleteProduct = (currentIndex) => {
-    var arr = productCards.filter((productCard, index) => {
-      return productCard.id !== currentIndex;
+    var arr = productCarts.filter((productCart, index) => {
+      return productCart.id !== currentIndex;
     })
-    setProductCards(arr);
+    setProductCarts(arr);
   }
   return (
     <div>
       <Navbar
       Link={Link}
-      productCards={productCards}
+      productCarts={productCarts}
       Datas={Datas}
       priceProduct = {priceProduct}
       setPriceProduct= {setPriceProduct}
-      setProductCards={setProductCards}
+      setProductCarts={setProductCarts}
       arrayProductCollapse= {arrayProductCollapse}
       setArrayProductCollapse= {setArrayProductCollapse}
       countsProduct= {countsProduct}
@@ -54,43 +60,54 @@ const App = () => {
       setOverlay= {setOverlay}
       elementOverlay= {elementOverlay}
       displayFormConfirm= {displayFormConfirm}
+      setDisplayFormRegister= {setDisplayFormRegister}
+      setDisplayFormLogin= {setDisplayFormLogin}
       ></Navbar>
       <Routes>
           <Route path='/PhoneShop-QTai' 
           element={
           <HomePage 
             PhonePopular={PhonePopular}  
-            productCards={productCards}
+            productCarts={productCarts}
             priceProduct= {priceProduct}
             setPriceProduct= {setPriceProduct}
-            setProductCards={setProductCards}
+            setProductCarts={setProductCarts}
+            openNotification= {openNotification}
+            setOpenNotification= {setOpenNotification}
+            notificationMessage= {notificationMessage}
+            setNotificationMessage= {setNotificationMessage}
             Link= {Link}
           />}/>
           <Route path='/PhoneShop-QTai/SalePage' element={<SalePage/>}/>
           <Route path='/PhoneShop-QTai/ShopAllPage' 
           element={
           <ShopAllPage
-            productCards={productCards}
-            setProductCards={setProductCards}
+            productCarts={productCarts}
+            setProductCarts={setProductCarts}
             priceProduct= {priceProduct}
             setPriceProduct= {setPriceProduct}
             Link= {Link}
             scrollToTop= {scrollToTop}
+            idInfoProduct= {idInfoProduct}
             setIdInfoProduct= {setIdInfoProduct}
+            openNotification={openNotification}
+            setNotificationMessage= {setNotificationMessage}
+            notificationMessage={notificationMessage}
+            setOpenNotification={setOpenNotification}
           />}/>
-          <Route path='/PhoneShop-QTai/CardPage'
-          element={<CardPage
+          <Route path='/PhoneShop-QTai/CartPage'
+          element={<CartPage
             arrayProductCollapse= {arrayProductCollapse}
             setArrayProductCollapse= {setArrayProductCollapse}
             countsProduct= {countsProduct}
             priceProduct= {priceProduct}
             setPriceProduct= {setPriceProduct}
             handleDeleteProduct= {handleDeleteProduct}
-            productCards= {productCards}
-            setProductCards= {setProductCards}
+            productCarts= {productCarts}
+            setProductCarts= {setProductCarts}
           />}
           ></Route>
-          <Route path='/PhoneShop-QTai/InfoProduct' 
+          <Route path={'/PhoneShop-QTai/InfoProduct/'+ idInfoProduct}
           element={
           <InfoProductPage
           idInfoProduct= {idInfoProduct}
@@ -99,6 +116,7 @@ const App = () => {
           setOverlay= {setOverlay}
           displayFormConfirm= {displayFormConfirm}
           setDisplayFormConfirm= {setDisplayFormConfirm}
+          elementFormConfirm={elementFormConfirm}
           />}/>
       </Routes>
       <Footer></Footer>
@@ -108,8 +126,30 @@ const App = () => {
       cursor={cursor}
       overlay={overlay}
       setDisplayFormConfirm= {setDisplayFormConfirm}
-      elementFormConfirm={elementFormConfirm}
-      displayFormConfirm={displayFormConfirm}
+      displayFormRegister= {displayFormRegister}
+      setDisplayFormRegister= {setDisplayFormRegister}
+      displayFormLogin= {displayFormLogin}
+      setDisplayFormLogin= {setDisplayFormLogin}
+      />
+      <Login
+      overlay={overlay}
+      setOverlay={setOverlay}
+      displayFormLogin= {displayFormLogin}
+      setDisplayFormLogin= {setDisplayFormLogin}
+      setDisplayFormRegister= {setDisplayFormRegister}
+      isLoading= {isLoading}
+      setIsLoading={setIsLoading}
+      ></Login>
+      <Register
+      overlay={overlay}
+      setOverlay={setOverlay}
+      displayFormRegister= {displayFormRegister}
+      setDisplayFormRegister= {setDisplayFormRegister}
+      setDisplayFormLogin= {setDisplayFormLogin}
+      ></Register>
+      <Loading
+      isLoading= {isLoading}
+      setIsLoading={setIsLoading}
       />
     </div>
   )

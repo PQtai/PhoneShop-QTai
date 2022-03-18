@@ -1,0 +1,93 @@
+.Register {
+    position:fixed;
+    width:30%;
+    min-width: 400px;
+    top: 10%;
+    left:35%;
+    right: 35%;
+    background-color: #FFFFFFFF;
+    padding: 0 20px;
+    z-index: 20;
+    display: none;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    border-radius: 6px;
+    transform-origin: center;
+    animation: pouring-effect ease-in-out .2s;
+    .formControls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .registerControl{
+            color: #b302ff;
+        }
+        .loginControl {
+            &:hover {
+                color: #fe3151;
+                cursor: pointer;
+            }
+        }
+    }
+    .formGroup {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        label {
+            flex: 1;
+        }
+        input {
+            border: none;
+            width: 100%;
+            border-bottom: 1px solid #666;
+            line-height: 20px;
+            outline: none;
+            font-size: 16px;
+            &:focus {
+                background-color: #FFFFFFFF;
+            }
+        }
+        .errorMsg{
+            color: #fe3151;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .btnControl{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        .btn {
+            height: 30px;
+            width: 30%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            &:hover{
+                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+            }
+        }
+        .btnContinue{
+            background-color: #91E7D9;
+            color: #FFFFFF;
+        }
+        .btnCancel {
+            background-color: #5A5BF3;
+            color: #FFFFFF;
+        }
+    }
+}
+.displayFormRegister{
+    display: block;
+}
+@keyframes pouring-effect {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

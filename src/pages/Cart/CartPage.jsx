@@ -4,16 +4,16 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import clsx from 'clsx'
-import style from './CardPage.module.scss'
-const CardPage = ({
+import style from './CartPage.module.scss'
+const CartPage = ({
   countsProduct , 
   arrayProductCollapse , 
   setArrayProductCollapse,
   priceProduct,
   setPriceProduct,
   handleDeleteProduct,
-  productCards,
-  setProductCards
+  productCarts,
+  setProductCarts
 }) => {
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const CardPage = ({
 
   const reduceNumberProduct = (product) => {
     let dem = 0;
-    for(var i in productCards){
-      if(productCards[i] === product){
+    for(var i in productCarts){
+      if(productCarts[i] === product){
         dem++;
       }
     }
@@ -34,9 +34,9 @@ const CardPage = ({
     }
   }
   return (
-    <div className={clsx(style.cardBody)} >
+    <div className={clsx(style.cartBody)} >
         <h3>Giỏ hàng của bạn</h3>
-        <div className={clsx(style.card)}>
+        <div className={clsx(style.cart)}>
           <div className={clsx(style.title)} >
             <div className={clsx(style.linkReturn)} >
               Tiếp tục mua sắm
@@ -63,7 +63,7 @@ const CardPage = ({
                       <div className={clsx(style.handleQuantity)}>
                         <button className={clsx(style.btn , style.btnUp)}
                         onClick={() => {
-                            setProductCards(productCards.concat([productCollapse]));
+                            setProductCarts(productCarts.concat([productCollapse]));
                             setPriceProduct( priceProduct + productCollapse.price)
                         }}
                         >
@@ -72,12 +72,12 @@ const CardPage = ({
                         <button className={clsx(style.btn , style.btndown)}
                         onClick={() => {
                           if(reduceNumberProduct(productCollapse)){
-                            const index = productCards.lastIndexOf(productCollapse)
+                            const index = productCarts.lastIndexOf(productCollapse)
                             console.log(index);
-                            const arr =  productCards.filter((productCard , indexProduct) => {
+                            const arr =  productCarts.filter((productCart , indexProduct) => {
                                   return index !== indexProduct;
                             })
-                            setProductCards(arr)
+                            setProductCarts(arr)
                             setPriceProduct( priceProduct - productCollapse.price);
                           }
                         }}
@@ -116,4 +116,4 @@ const CardPage = ({
   )
 }
 
-export default CardPage
+export default CartPage

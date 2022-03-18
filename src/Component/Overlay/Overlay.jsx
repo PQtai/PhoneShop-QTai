@@ -1,30 +1,33 @@
 import React from 'react'
 import clsx from 'clsx'
 import style from './Overlay.module.scss'
-import FormConfirm from '../FormConfirm/FormConfirm'
 const Overlay = ({ 
     elementOverlay,
-    setOverlay,
     cursor,
     overlay,
+    setOverlay,
     setDisplayFormConfirm,
-    elementFormConfirm,
-    displayFormConfirm}) => {
+    setDisplayFormRegister,
+    displayFormRegister,
+    setDisplayFormLogin,
+    displayFormLogin
+    }) => {
   return (
     <div
-    ref={elementOverlay} 
+    ref={elementOverlay}
+    style={
+      (displayFormRegister || displayFormLogin)?
+      {zIndex : "15" ,cursor : `url(${cursor}) 20 20,default`}
+      :{cursor : `url(${cursor}) 20 20,default`}
+    }
     className={clsx(style.categoryOverlay , {
       [style.active] : overlay
     })}
     onClick={() => {
-        setOverlay(false);
-        setDisplayFormConfirm(false);
-    }}
-    style={{cursor : `url(${cursor}) 20 20,default`}}>
-      <FormConfirm
-      elementFormConfirm={elementFormConfirm}
-      displayFormConfirm={displayFormConfirm}
-      />
+      setDisplayFormConfirm(false);
+      setOverlay(false);
+      displayFormRegister?setDisplayFormRegister(false):setDisplayFormLogin(false);
+    }}>
     </div>
   )
 }

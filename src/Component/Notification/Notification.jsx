@@ -1,12 +1,33 @@
-import React from 'react'
-import style from './Notification.module.scss'
-import clsx from 'clsx'
-const Notification = ({elementNotification}) => {
-  return (
-    <div ref={elementNotification} className={clsx(style.notification)} >
-            Successful
-    </div>
-  )
-}
+import * as React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-export default Notification
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
+const Notification = ({
+  openNotification,
+  notificationMessage,
+  setOpenNotification
+})=> {
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpenNotification(false);
+    };
+  
+    return (
+        <>
+        <Snackbar open={openNotification} autoHideDuration={2000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={notificationMessage} sx={{ width: '100%' }}>
+            This is a success message!
+          </Alert>
+        </Snackbar>
+        </>
+    );
+  }
+export default Notification;

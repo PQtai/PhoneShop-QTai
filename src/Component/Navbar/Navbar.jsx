@@ -13,10 +13,9 @@ import { Grid } from '@mui/material';
 
 const Navbar = ({
   Link , 
-  productCards ,
+  productCarts ,
   priceProduct,
   setPriceProduct,
-  setProductCards,
   arrayProductCollapse,
   setArrayProductCollapse,
   countsProduct,
@@ -25,13 +24,15 @@ const Navbar = ({
   overlay,
   setOverlay,
   elementOverlay,
-  displayFormConfirm
+  displayFormConfirm,
+  setDisplayFormRegister,
+  setDisplayFormLogin
 }) => {
   const elementSearch = useRef();
   const elementNavbar = useRef();
   const elementSupport = useRef();
   const elementAccount = useRef();
-  const elementCard = useRef();
+  const elementCart = useRef();
   const [zIndexNav , setZIndexNav] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -42,7 +43,7 @@ const Navbar = ({
       elementSearch.current.classList.remove(clsx(style.displaySearch));
       elementSupport.current.classList.remove(clsx(style.displaySup));
       elementAccount.current.classList.remove(clsx(style.displayAccount));
-      elementCard.current.classList.remove(clsx(style.displayCardInf))
+      elementCart.current.classList.remove(clsx(style.displayCartInf))
       if (document.documentElement.scrollTop > 60 ) {
         elementNavbar.current.classList.add(clsx(style.navbarScroll));
         setZIndexNav(false);
@@ -63,13 +64,13 @@ const Navbar = ({
   },[]);
   useEffect(() => {
     countsProduct.current = {};
-    productCards.forEach(card => {
-      countsProduct.current[card.id] =  ( countsProduct.current[card.id] || 0) + 1;
+    productCarts.forEach(cart => {
+      countsProduct.current[cart.id] =  ( countsProduct.current[cart.id] || 0) + 1;
     })
-    setArrayProductCollapse(productCards.filter((card , index) => {
-      return productCards.indexOf(card) === index;
+    setArrayProductCollapse(productCarts.filter((cart , index) => {
+      return productCarts.indexOf(cart) === index;
     }))
-  },[productCards])
+  },[productCarts])
   return (
     <nav className={clsx(style.navbar , {
       [style.zIndexNav] : zIndexNav
@@ -93,7 +94,7 @@ const Navbar = ({
                 elementSearch.current.classList.add(clsx(style.displaySearch));
                 elementSupport.current.classList.remove(clsx(style.displaySup));
                 elementAccount.current.classList.remove(clsx(style.displayAccount));
-                elementCard.current.classList.remove(clsx(style.displayCardInf));
+                elementCart.current.classList.remove(clsx(style.displayCartInf));
               }} >
                 Tìm Kiếm
                 
@@ -105,7 +106,7 @@ const Navbar = ({
                 elementSupport.current.classList.add(clsx(style.displaySup));
                 elementAccount.current.classList.remove(clsx(style.displayAccount));
                 elementSearch.current.classList.remove(clsx(style.displaySearch));
-                elementCard.current.classList.remove(clsx(style.displayCardInf));
+                elementCart.current.classList.remove(clsx(style.displayCartInf));
               }}
               >
                 Hỗ Trợ
@@ -115,31 +116,27 @@ const Navbar = ({
               className={clsx(style.categoryItem)}
               onClick={() => {
                 setOverlay(true);
-                // elementAccount.current.slideDown("slow");
                 elementAccount.current.classList.add(clsx(style.displayAccount));
                 elementSearch.current.classList.remove(clsx(style.displaySearch));
                 elementSupport.current.classList.remove(clsx(style.displaySup));
-                elementCard.current.classList.remove(clsx(style.displayCardInf));
+                elementCart.current.classList.remove(clsx(style.displayCartInf));
                 elementNavbar.current.classList.remove(clsx(style.navbarScroll));
-              }}
-              
-              >
+              }}>
                 Tài khoản của tôi
-                
               </li>
               <li 
                 className={clsx(style.categoryItem ,style.categoryQuantity)}
                 onClick={() => {
                   setOverlay(true);
-                  elementCard.current.classList.add(clsx(style.displayCardInf));
+                  elementCart.current.classList.add(clsx(style.displayCartInf));
                   elementAccount.current.classList.remove(clsx(style.displayAccount));
                   elementSearch.current.classList.remove(clsx(style.displaySearch));
                   elementSupport.current.classList.remove(clsx(style.displaySup));
                   elementNavbar.current.classList.remove(clsx(style.navbarScroll));
                 }}
               >
-                <AddShoppingCartIcon className={clsx(style.itemCard)}/>
-                  <span className={clsx(style.itemQuantity)}>{productCards.length}</span>
+                <AddShoppingCartIcon className={clsx(style.itemCart)}/>
+                  <span className={clsx(style.itemQuantity)}>{productCarts.length}</span>
               </li>
           </ul>
         </div>
@@ -204,30 +201,38 @@ const Navbar = ({
             <p>Tạo tài khoản hoặc đăng nhập để xem đơn đặt hàng, trả lại hoặc điều chỉnh thông tin cá nhân của bạn.</p>
           </div>
           <div className={clsx(style.accountButton)}>
-            <button className={clsx(style.btnCreateAccount)}>
+            <button 
+            onClick={()=> {
+              setDisplayFormRegister(true);
+            }}
+            className={clsx(style.btnCreateAccount)}>
                 Create account
             </button>
-            <button className={clsx(style.btnLogin)}>
+            <button 
+            onClick={()=> {
+              setDisplayFormLogin(true)
+            }}
+            className={clsx(style.btnLogin)}>
                 <span>Login</span>
                 <KeyboardTabIcon className={clsx(style.btnIconArrow)}></KeyboardTabIcon>
             </button>
           </div>
         </div>
-        <div ref={elementCard} className={clsx(style.itemCardInf)}>
+        <div ref={elementCart} className={clsx(style.itemCartInf)}>
           {
-          productCards.length > 0?
+          productCarts.length > 0?
           <div className={clsx(style.framesProduct)}>
               {arrayProductCollapse.map((Data, currentIndex) => {
                   return (
-                    <div className={clsx(style.itemCard)} key={currentIndex} >
-                        <div className={clsx(style.imgProductCard)} >
+                    <div className={clsx(style.itemCart)} key={currentIndex} >
+                        <div className={clsx(style.imgProductCart)} >
                           <span>X{countsProduct.current[Data.id]}</span>
                           <img className={clsx(style.imgProduct)} src={Data.image} alt={Data.name}></img>
                         </div>
                         <ul className={clsx(style.listProduct)} >
                           <li className={clsx(style.itemProduct)} >{Data.name}</li>
-                          <li className={clsx(style.itemProduct)} >{Data.color}</li>
-                          <li className={clsx(style.itemProduct)} >{Data.memory}</li>
+                          {/* <li className={clsx(style.itemProduct)} >{Data.color}</li>
+                          <li className={clsx(style.itemProduct)} >{Data.memory}</li> */}
                           <li className={clsx(style.itemProduct)} >{Data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</li>
                         </ul>
                         <div className={clsx(style.option)} >
@@ -242,7 +247,7 @@ const Navbar = ({
                           </button>
                           <button 
                           onClick={() => {
-                            navigate('/PhoneShop-QTai/CardPage')
+                            navigate('/PhoneShop-QTai/CartPage')
                             setOverlay(false);
                           }} 
                           className={clsx(style.optionRepair)}
@@ -251,15 +256,15 @@ const Navbar = ({
                     </div>
                   )
               })}
-          </div>:<span className={clsx(style.noCard)}>Giỏ hàng của bạn trống</span>
+          </div>:<span className={clsx(style.noCart)}>Giỏ hàng của bạn trống</span>
           }
-          <div className={clsx(style.cardPrice)}>
+          <div className={clsx(style.cartPrice)}>
             <span>Giá :</span>
             <span>{priceProduct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</span>
           </div>
-          <div className={clsx(style.cardCheckout)}>
+          <div className={clsx(style.cartCheckout)}>
               <button onClick={() => {
-                navigate('/PhoneShop-QTai/CardPage')
+                navigate('/PhoneShop-QTai/CartPage')
                 setOverlay(false);
               }} 
               className={clsx(style.btnCheckout)}>Checkout</button>
