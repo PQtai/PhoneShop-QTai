@@ -11,7 +11,11 @@ const Register = ({
     setOverlay,
     displayFormRegister,
     setDisplayFormRegister,
-    setDisplayFormLogin
+    setDisplayFormLogin,
+    setMessage,
+    setIsLoading,
+    setOpenNotification,
+    setNotificationMessage
 }) => {
 
 
@@ -44,6 +48,7 @@ const Register = ({
             .matches(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, "Số điện thoại không hợp lệ"),
         }),
         onSubmit: (values) => {
+            setIsLoading(true);
             fetchApi(values);
         }
     });
@@ -51,10 +56,19 @@ const Register = ({
         const axios = require('axios');
         return axios.post('https://lap-center.herokuapp.com/api/register',datas)
                 .then(function (response) {
-                    console.log(response);
+                    setIsLoading(false);
+                    setOverlay(false);
+                    displayFormRegister?setDisplayFormRegister(false):setDisplayFormLogin(false)
+                    setOpenNotification(true);
+                    setNotificationMessage("success");
+                    setMessage("Đăng ký thành công!")
+                    formik.resetForm();
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    setIsLoading(false);
+                    setOpenNotification(true);
+                    setNotificationMessage("error");
+                    setMessage("Tài khoản hoặc mật khẩu không đúng!")
                 });
     }
     return (

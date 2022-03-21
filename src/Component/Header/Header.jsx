@@ -18,7 +18,7 @@ const Header = ({Link}) => {
                     <div className={clsx(style.introduceTitle)}>
                         <p className={clsx(style.preamble)}>Bắt đầu năm 2022 đầy sang trọng</p>
                         <h2 className={clsx(style.preambleTitle)}>Những mẫu điện thoại mới nhất luôn được cập nhật</h2>
-                        <Link to='/PhoneShop-QTai/shopAllPage' className={clsx(style.link)} >
+                        <Link to='/PhoneShop-QTai/ShopAllPage/keywork=all' className={clsx(style.link)} >
                             <span className={clsx(style.preambleHover)}>Mua ngay bây giờ</span>
                         </Link>
                     </div>

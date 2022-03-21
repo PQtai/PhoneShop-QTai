@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef,useEffect } from 'react'
 import {Routes , Route , Link } from 'react-router-dom'
 
 import HomePage from './pages/Home/HomePage'
@@ -14,6 +14,7 @@ import Overlay from './Component/Overlay/Overlay'
 import Login from './Component/Login/Login'
 import Register from './Component/Register/Register'
 import Loading from './Component/Loading/Loading'
+import Notification from './Component/Notification/Notification'
 const App = () => {
   const [productCarts,setProductCarts] = useState([]);
   const [priceProduct , setPriceProduct] = useState(0);
@@ -25,11 +26,13 @@ const App = () => {
   const [displayFormLogin,setDisplayFormLogin] = useState(false);
   const [isLoading , setIsLoading] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
-  const [notificationMessage , setNotificationMessage] = useState("");
-  const countsProduct = useRef({})
+  const [notificationMessage , setNotificationMessage] = useState();
+  const [message , setMessage] = useState("");
+  const [checkLogin , setCheckLogin] = useState(false);
+  const countsProduct = useRef({});
   const elementOverlay = useRef();
   const elementFormConfirm = useRef();
-  const scrollToTop = () => {
+  const scrollToTop =  () => {
     const c = document.documentElement.scrollTop || document.body.scrollTop;
     if (c > 0) {
       window.requestAnimationFrame(scrollToTop);
@@ -42,6 +45,10 @@ const App = () => {
     })
     setProductCarts(arr);
   }
+  // setIsLoading(true);
+  useEffect(() => {
+    localStorage.clear();
+  },[])
   return (
     <div>
       <Navbar
@@ -60,8 +67,11 @@ const App = () => {
       setOverlay= {setOverlay}
       elementOverlay= {elementOverlay}
       displayFormConfirm= {displayFormConfirm}
+      displayFormRegister= {displayFormRegister}
       setDisplayFormRegister= {setDisplayFormRegister}
       setDisplayFormLogin= {setDisplayFormLogin}
+      checkLogin= {checkLogin}
+      setCheckLogin= {setCheckLogin}
       ></Navbar>
       <Routes>
           <Route path='/PhoneShop-QTai' 
@@ -76,10 +86,11 @@ const App = () => {
             setOpenNotification= {setOpenNotification}
             notificationMessage= {notificationMessage}
             setNotificationMessage= {setNotificationMessage}
+            setMessage= {setMessage}
             Link= {Link}
           />}/>
           <Route path='/PhoneShop-QTai/SalePage' element={<SalePage/>}/>
-          <Route path='/PhoneShop-QTai/ShopAllPage' 
+          <Route path='/PhoneShop-QTai/ShopAllPage/keywork=:search' 
           element={
           <ShopAllPage
             productCarts={productCarts}
@@ -94,6 +105,7 @@ const App = () => {
             setNotificationMessage= {setNotificationMessage}
             notificationMessage={notificationMessage}
             setOpenNotification={setOpenNotification}
+            setMessage= {setMessage}
           />}/>
           <Route path='/PhoneShop-QTai/CartPage'
           element={<CartPage
@@ -107,7 +119,7 @@ const App = () => {
             setProductCarts= {setProductCarts}
           />}
           ></Route>
-          <Route path={'/PhoneShop-QTai/InfoProduct/'+ idInfoProduct}
+          <Route path={'/PhoneShop-QTai/ShopAllPage/'+ idInfoProduct}
           element={
           <InfoProductPage
           idInfoProduct= {idInfoProduct}
@@ -117,6 +129,10 @@ const App = () => {
           displayFormConfirm= {displayFormConfirm}
           setDisplayFormConfirm= {setDisplayFormConfirm}
           elementFormConfirm={elementFormConfirm}
+          checkLogin= {checkLogin}
+          setOpenNotification= {setOpenNotification}
+          setNotificationMessage= {setNotificationMessage}
+          setMessage= {setMessage}
           />}/>
       </Routes>
       <Footer></Footer>
@@ -125,6 +141,7 @@ const App = () => {
       setOverlay={setOverlay}
       cursor={cursor}
       overlay={overlay}
+      displayFormConfirm={displayFormConfirm}
       setDisplayFormConfirm= {setDisplayFormConfirm}
       displayFormRegister= {displayFormRegister}
       setDisplayFormRegister= {setDisplayFormRegister}
@@ -132,13 +149,15 @@ const App = () => {
       setDisplayFormLogin= {setDisplayFormLogin}
       />
       <Login
-      overlay={overlay}
       setOverlay={setOverlay}
       displayFormLogin= {displayFormLogin}
       setDisplayFormLogin= {setDisplayFormLogin}
       setDisplayFormRegister= {setDisplayFormRegister}
-      isLoading= {isLoading}
       setIsLoading={setIsLoading}
+      setOpenNotification= {setOpenNotification}
+      setNotificationMessage= {setNotificationMessage}
+      setMessage= {setMessage}
+      setCheckLogin= {setCheckLogin}
       ></Login>
       <Register
       overlay={overlay}
@@ -146,11 +165,21 @@ const App = () => {
       displayFormRegister= {displayFormRegister}
       setDisplayFormRegister= {setDisplayFormRegister}
       setDisplayFormLogin= {setDisplayFormLogin}
+      setMessage= {setMessage}
+      setIsLoading= {setIsLoading}
+      setOpenNotification= {setOpenNotification}
+      setNotificationMessage= {setNotificationMessage}
       ></Register>
       <Loading
       isLoading= {isLoading}
       setIsLoading={setIsLoading}
       />
+       <Notification 
+      openNotification={openNotification}
+      notificationMessage={notificationMessage}
+      setOpenNotification={setOpenNotification}
+      message={message}
+      ></Notification>
     </div>
   )
 }

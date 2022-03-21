@@ -16,7 +16,8 @@ const HomePage = ({PhonePopular ,
   notificationMessage,
   setNotificationMessage,
   openNotification,
-  setOpenNotification
+  setOpenNotification,
+  setMessage
   }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,6 +41,7 @@ const HomePage = ({PhonePopular ,
       setNotificationMessage= {setNotificationMessage}
       openNotification={openNotification}
       setOpenNotification={setOpenNotification}
+      setMessage={setMessage}
       ></Main>
       <Outlet></Outlet>
     </>

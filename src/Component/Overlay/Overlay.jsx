@@ -10,15 +10,15 @@ const Overlay = ({
     setDisplayFormRegister,
     displayFormRegister,
     setDisplayFormLogin,
-    displayFormLogin
+    displayFormConfirm
     }) => {
   return (
     <div
     ref={elementOverlay}
     style={
-      (displayFormRegister || displayFormLogin)?
-      {zIndex : "15" ,cursor : `url(${cursor}) 20 20,default`}
-      :{cursor : `url(${cursor}) 20 20,default`}
+      displayFormConfirm?
+      {zIndex : "20" ,cursor : `url(${cursor}) 20 20,default`}
+      :{cursor : `url(${cursor}) 20 20,default` }
     }
     className={clsx(style.categoryOverlay , {
       [style.active] : overlay

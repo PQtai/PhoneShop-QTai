@@ -17,8 +17,12 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        .logo{
+            display: inline-flex;
+            align-items: center;
+        }
         .LoginControl{
-            color: #b302ff;
+            // color: #b302ff;
         }
         .registerControl {
             &:hover {
@@ -69,12 +73,13 @@
             }
         }
         .btnLogin{
-            background-color: #91E7D9;
+            background-color:#111;
             color: #FFFFFF;
         }
         .btnCancel {
-            background-color: #5A5BF3;
-            color: #FFFFFF;
+            // background-color: #5A5BF3;
+            color: #111;
+            font-weight: 600;
         }
     }
 }

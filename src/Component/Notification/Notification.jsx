@@ -10,7 +10,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Notification = ({
   openNotification,
   notificationMessage,
-  setOpenNotification
+  setOpenNotification,
+  message
 })=> {
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -24,7 +25,7 @@ const Notification = ({
         <>
         <Snackbar open={openNotification} autoHideDuration={2000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={notificationMessage} sx={{ width: '100%' }}>
-            This is a success message!
+            {message}
           </Alert>
         </Snackbar>
         </>

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid ,Container} from '@mui/material'
 
 
 const Products = ( {
@@ -20,24 +20,32 @@ const Products = ( {
     idInfoProduct,
     setIdInfoProduct,
     setOpenNotification,
-    setNotificationMessage
+    setNotificationMessage,
+    keyworkSearch,
+    setMessage
     }) => {
 
-        const navigate = useNavigate();
+    const navigate = useNavigate();
   return (
     <main className={clsx(style.products)} >
+        <Container fixed>
         <div>
-            <h2>Tất cả sản phẩm</h2>
+            <h2>{
+                (arrProductsFilter.length !== 0) && (keyworkSearch !== 'all')?
+                arrProductsFilter[0].theloai:
+                (keyworkSearch === 'all'?"Tất cả sản phẩm":"Không tìm thấy sản phẩm nào")
+            }
+            </h2>
         </div>
-        <Grid container  spacing={1} justify="center">
+
+        <Grid container  spacing={4} justify="center">
         {(arrProductsFilter?arrProductsFilter:Datas).map((data , index) => {
             return (
             <Grid key={index} item xs={grid?grid.xs:12} sm={grid?grid.sm:6} md={grid?grid.md:4}>
-                {/* <Link to={"/PhoneShop-QTai/InfoProduct/"+ data.id} > */}
                     <div
                     onClick={() =>{
                         setIdInfoProduct(data.id);
-                        navigate("/PhoneShop-QTai/InfoProduct/"+ data.id);
+                        navigate("/PhoneShop-QTai/ShopAllPage/"+ data.id);
                     }} 
                     className = {clsx(style.itemProduct)}>
                         <img className={clsx(style.productImg)}  src={data.image} alt="ảnh sản phẩm" ></img>
@@ -53,16 +61,23 @@ const Products = ( {
                                     <button 
                                     className={clsx(style.btnAddCart)} 
                                     onClick={(e) => {
-                                        e.preventDefault();
                                         e.stopPropagation();
-                                        setOpenNotification(true);
-                                        setNotificationMessage("success");
-                                        e.target.style.cursor = 'not-allowed';
-                                        setTimeout(() => {
-                                            setProductCarts(productCarts.concat([data]));
-                                            setPriceProduct( priceProduct + data.price);
-                                            e.target.style.cursor = 'pointer';
-                                        },[2000])
+                                        if(localStorage.customerName){
+                                            e.preventDefault();
+                                            setOpenNotification(true);
+                                            setNotificationMessage("success");
+                                            setMessage("Thêm thành công!")
+                                            e.target.style.cursor = 'not-allowed';
+                                            setTimeout(() => {
+                                                setProductCarts(productCarts.concat([data]));
+                                                setPriceProduct( priceProduct + data.price);
+                                                e.target.style.cursor = 'pointer';
+                                            },[1000])
+                                        }else{
+                                            setOpenNotification(true);
+                                            setNotificationMessage("info");
+                                            setMessage("Bạn cần đăng nhập để thực hiện chức năng!")
+                                        }
                                     }}
                                     >
                                         <AddShoppingCartIcon className={clsx(style.btnIcon)} />
@@ -71,11 +86,11 @@ const Products = ( {
                             </div>
                             </div>
                         </div>
-                    {/* </Link> */}
                 </Grid>
             )
         })}
         </Grid>
+        </Container>
     </main>
   )
 }

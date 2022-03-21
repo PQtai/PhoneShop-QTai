@@ -16,7 +16,11 @@ const InfoProductPage = ({
   setOverlay,
   setDisplayFormConfirm,
   elementFormConfirm,
-  displayFormConfirm
+  displayFormConfirm,
+  checkLogin,
+  setOpenNotification,
+  setNotificationMessage,
+  setMessage,
 }) => {
   const navigate = useNavigate();
   const position = useRef(0)
@@ -80,8 +84,14 @@ const InfoProductPage = ({
               </ul>
               <button 
               onClick={() => {
-                setOverlay(true);
-                setDisplayFormConfirm(true)
+                if(!checkLogin){
+                  setOpenNotification(true);
+                  setNotificationMessage("info");
+                  setMessage("Bạn cần đăng nhập để thực hiện chức năng!")
+                }else{
+                  setOverlay(true);
+                  setDisplayFormConfirm(true)
+                }
               }}
               className={clsx(style.btnCheckout)}
               >Mua ngay</button>
@@ -163,7 +173,7 @@ const InfoProductPage = ({
                 className={style.itemSimilarProduct}
                 onClick={() => {
                   setIdInfoProduct(product.id)
-                  navigate('/PhoneShop-QTai/InfoProduct/' + product.id)
+                  navigate('/PhoneShop-QTai/ShopAllPage/' + product.id)
                   scrollToTop();
                 }}>
                 <div

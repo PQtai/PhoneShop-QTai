@@ -9,7 +9,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 import style from './Main.module.scss'
-import Notification from '../Notification/Notification'
 
 
 
@@ -19,10 +18,9 @@ const Main = ({
     setProductCarts , 
     setPriceProduct,
     priceProduct,
-    openNotification,
     setOpenNotification,
-    notificationMessage,
     setNotificationMessage,
+    setMessage
 }) => {
 const elementPopular = useRef(PhonePopular.map(()=> React.createRef()));
 const position = useRef(0);
@@ -130,14 +128,22 @@ const functionHandlePopular = () => {
                                 <button 
                                 className={clsx(style.btnAddCart)} 
                                 onClick={(e) => {
-                                    setOpenNotification(true);
-                                    setNotificationMessage("success");
-                                    e.target.style.cursor = 'not-allowed';
-                                    setTimeout(() => {
-                                        setProductCarts(productCarts.concat([phone]));
-                                        setPriceProduct( priceProduct + phone.price);
-                                        e.target.style.cursor = 'pointer';
-                                    },[2000])
+                                    e.stopPropagation();
+                                    if(localStorage.customerName){
+                                        setOpenNotification(true);
+                                        setNotificationMessage("success");
+                                        setMessage("Thêm thành công!")
+                                        e.target.style.cursor = 'not-allowed';
+                                        setTimeout(() => {
+                                            setProductCarts(productCarts.concat([phone]));
+                                            setPriceProduct( priceProduct + phone.price);
+                                            e.target.style.cursor = 'pointer';
+                                        },[1000])
+                                    }else{
+                                        setOpenNotification(true);
+                                        setNotificationMessage("info");
+                                        setMessage("Bạn cần đăng nhập để thực hiện chức năng!")
+                                    }
                                 }}
                                 >Thêm vào giỏ hàng</button>
                             </div>
@@ -165,11 +171,6 @@ const functionHandlePopular = () => {
               </Grid>
           </Grid>
       </div>
-      <Notification 
-      openNotification={openNotification}
-      notificationMessage={notificationMessage}
-      setOpenNotification={setOpenNotification}
-      ></Notification>
     </div>
   )
 }

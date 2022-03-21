@@ -1,19 +1,21 @@
-import React , {useEffect} from 'react';
+import React  from 'react';
 import clsx from 'clsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import PhoneIphoneTwoToneIcon from '@mui/icons-material/PhoneIphoneTwoTone';
 
 
 import style from './Login.module.scss'
 const Login = ({
-    overlay,
     setOverlay,
     displayFormLogin,
     setDisplayFormLogin,
     setDisplayFormRegister,
     setIsLoading,
-    isLoading
+    setOpenNotification,
+    setNotificationMessage,
+    setMessage,
+    setCheckLogin,
 }) => {
 
     const formik = useFormik({
@@ -44,18 +46,23 @@ const Login = ({
             password: datas.password,
         })
             .then(function (response) {
-                setIsLoading(false);
                 localStorage.setItem("customerName", response.data.userName);
                 localStorage.setItem("userId", response.data.userId);
                 localStorage.setItem("isAdmin", response.data.isAdmin);
                 formik.resetForm();
+                setIsLoading(false);
                 setOverlay(false);
                 displayFormLogin?setDisplayFormLogin(false):setDisplayFormRegister(false);
+                setOpenNotification(true);
+                setNotificationMessage("success");
+                setMessage("Đăng nhập thành công!");
+                setCheckLogin(true);
             })
             .catch(function (error) {
-                console.log("Sai mật khẩu");
                 setIsLoading(false);
-                formik.resetForm();
+                setOpenNotification(true);
+                setNotificationMessage("error");
+                setMessage("Tài khoản hoặc mật khẩu không đúng!")
             });
     }
     return (
@@ -65,6 +72,10 @@ const Login = ({
             <form onSubmit={formik.handleSubmit} >
                 <div className={clsx(style.formControls)} >
                     <h2 className={clsx(style.LoginControl)} >Login</h2>
+                    <div className={clsx(style.logo)} >
+                        <PhoneIphoneTwoToneIcon className={clsx(style.logoIcon)} />
+                        <h2 className={clsx(style.logoTitle)}>Q T S</h2>
+                    </div>
                     <span 
                     onClick={() => {
                         setDisplayFormLogin(false);

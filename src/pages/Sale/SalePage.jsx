@@ -2,8 +2,13 @@ import React from 'react'
 
 const SalePage = () => {
   return (
-    <div>
-      trang giảm giá
+    <div style={{
+    height : '400px', 
+    display : 'flex',
+    alignItems : 'center',
+    justifyContent : 'center'
+    }} >
+      TRANG GIẢM GIÁ
     </div>
   )
 }
