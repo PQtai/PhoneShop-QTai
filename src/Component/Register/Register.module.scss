@@ -2,9 +2,11 @@
     position:fixed;
     width:30%;
     min-width: 400px;
-    top: 10%;
+    top: 16%;
     left:35%;
     right: 35%;
+    max-height: 80%;
+    overflow-y: scroll;
     background-color: #FFFFFFFF;
     padding: 0 20px;
     z-index: 20;
@@ -18,7 +20,7 @@
         align-items: center;
         justify-content: space-between;
         .registerControl{
-            color: #b302ff;
+            color: #111;
         }
         .loginControl {
             &:hover {
@@ -69,12 +71,12 @@
             }
         }
         .btnContinue{
-            background-color: #91E7D9;
+            background-color: #111;
             color: #FFFFFF;
         }
         .btnCancel {
-            background-color: #5A5BF3;
-            color: #FFFFFF;
+            background-color: #efefef;
+            color: #111;
         }
     }
 }

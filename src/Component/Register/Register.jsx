@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import clsx from 'clsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 
 import style from './Register.module.scss'
 const Register = ({
+    overlay,
     setOverlay,
     displayFormRegister,
     setDisplayFormRegister,
@@ -18,7 +19,9 @@ const Register = ({
     setNotificationMessage
 }) => {
 
-
+    useEffect(() => {
+        formik.resetForm();
+    },[overlay , displayFormRegister])
     const formik = useFormik({
         initialValues: {
             name: "",

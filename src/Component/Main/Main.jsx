@@ -5,7 +5,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import { useNavigate } from 'react-router-dom';
 
 
 import style from './Main.module.scss'
@@ -20,13 +20,15 @@ const Main = ({
     priceProduct,
     setOpenNotification,
     setNotificationMessage,
-    setMessage
+    setMessage,
+    setIdInfoProduct
 }) => {
 const elementPopular = useRef(PhonePopular.map(()=> React.createRef()));
 const position = useRef(0);
 const paretPopular = useRef();
 const childPopular = useRef();
 const widthItemPopular = useRef();
+const navigate = useNavigate();
 const po = useRef();
 const co = useRef();
 const cw = useRef();
@@ -113,7 +115,14 @@ const functionHandlePopular = () => {
             <div className={clsx(style.gridContainer)} ref={childPopular} >
                 {PhonePopular.map((phone, index) => {
                     return (
-                    <div className={clsx(style.gridPopular)} key={index}  ref={elementPopular.current[index]}>
+                    <div 
+                    onClick={(e) => {
+                        setIdInfoProduct(phone.id)
+                        navigate('/PhoneShop-QTai/ShopAllPage/' + phone.id)
+                    }}
+                    className={clsx(style.gridPopular)} 
+                    key={index}  
+                    ref={elementPopular.current[index]}>
                         <div className={clsx(style.itemPopular)}>
                             <img className={clsx(style.imagePhone)}  src={phone.image} alt="phone popular"/>
                         </div>

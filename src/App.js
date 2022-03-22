@@ -88,6 +88,7 @@ const App = () => {
             setNotificationMessage= {setNotificationMessage}
             setMessage= {setMessage}
             Link= {Link}
+            setIdInfoProduct= {setIdInfoProduct}
           />}/>
           <Route path='/PhoneShop-QTai/SalePage' element={<SalePage/>}/>
           <Route path='/PhoneShop-QTai/ShopAllPage/keywork=:search' 
@@ -149,6 +150,7 @@ const App = () => {
       setDisplayFormLogin= {setDisplayFormLogin}
       />
       <Login
+      overlay={overlay}
       setOverlay={setOverlay}
       displayFormLogin= {displayFormLogin}
       setDisplayFormLogin= {setDisplayFormLogin}

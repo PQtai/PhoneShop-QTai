@@ -108,6 +108,7 @@ const Navbar = ({
                 elementSupport.current.classList.remove(clsx(style.displaySup));
                 elementAccount.current.classList.remove(checkLogin?style.displaylogged:style.displayAccount);
                 elementCart.current.classList.remove(clsx(style.displayCartInf));
+                setOverlay(false);
               }} >
                 <input 
                 type="text" 
@@ -300,7 +301,7 @@ const Navbar = ({
                           </div>
                         )
                     })}
-                </div>:<span className={clsx(style.noCart)}>Giỏ hàng của bạn trống</span>
+                </div>:<span className={clsx(style.noCart)} >Giỏ hàng của bạn trống</span>
                 }
                 <div className={clsx(style.cartPrice)}>
                   <span>Giá :</span>

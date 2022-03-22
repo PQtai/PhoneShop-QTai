@@ -82,6 +82,30 @@
             font-weight: 600;
         }
     }
+    .forgotPassword{
+        cursor: pointer;
+        display: inline-block;
+        color: #0055aa;
+    }
+    .loginWith{
+        p {
+            text-align: center;
+        }
+        .loginList{
+            display: flex;
+            justify-content: space-between;
+            .loginItem{
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 25%;
+                border: 1px solid #ccc;
+                padding: 4px;
+                cursor: pointer;
+            }
+            padding-bottom: 40px;
+        }
+    }
 }
 .displayFormLogin{
     display: block;

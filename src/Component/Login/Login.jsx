@@ -1,12 +1,16 @@
-import React  from 'react';
+import React,{useEffect}  from 'react';
 import clsx from 'clsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PhoneIphoneTwoToneIcon from '@mui/icons-material/PhoneIphoneTwoTone';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from '@mui/icons-material/Google';
+import AppleIcon from '@mui/icons-material/Apple';
 
 
 import style from './Login.module.scss'
 const Login = ({
+    overlay,
     setOverlay,
     displayFormLogin,
     setDisplayFormLogin,
@@ -17,7 +21,9 @@ const Login = ({
     setMessage,
     setCheckLogin,
 }) => {
-
+    useEffect(() => {
+        formik.resetForm();
+    },[overlay , displayFormLogin])
     const formik = useFormik({
     initialValues: {
         phone: "",
@@ -126,6 +132,24 @@ const Login = ({
                     type='submit'
                     className={clsx(style.btn, style.btnLogin)
                     }>Login</button>
+                </div>
+                <div className={clsx(style.forgotPassword)}>Quên mật khẩu</div>
+                <div className={clsx(style.loginWith)}>
+                    <p>Login with :</p>
+                    <ul className={clsx(style.loginList)}>
+                        <li className={clsx(style.loginItem)} >
+                            <FacebookIcon/>
+                            <span>Facebook</span>
+                        </li>
+                        <li className={clsx(style.loginItem)} >
+                            <GoogleIcon/>
+                            <span>Google</span>
+                        </li>
+                        <li className={clsx(style.loginItem)} >
+                            <AppleIcon/>
+                            <span>Apple</span>
+                        </li>
+                    </ul>
                 </div>
             </form>
         </div>
