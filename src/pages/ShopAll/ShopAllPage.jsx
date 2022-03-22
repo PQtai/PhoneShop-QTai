@@ -28,6 +28,9 @@ const ShopAllPage = ( {
     const location = useLocation();
     const keyworkSearch =  location.pathname?.split("keywork=")[1]
 useEffect(() => {
+  scrollToTop();
+},[]);
+useEffect(() => {
   const currentSearch =  Datas.some((data , index)=> {
     return data.theloai.toLowerCase().includes(keyworkSearch.toLowerCase());
   })
